@@ -1,8 +1,10 @@
-import qt
 import os
+import qt
 import time
 import requests
-from qt import dt, np, pd
+
+from qt import dt, np, pd, os
+from pathlib import Path
 
 EODHD_API_KEY = os.environ.get('EODHD_API_KEY')
 
