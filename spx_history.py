@@ -72,7 +72,7 @@ def get_raw_intraday(symbol, start_dt, end_dt, api_token=EODHD_API_KEY):
 			}
 			
 			qt.log.info(f"querying intraday data for symbol {symbol} from {current_start} to {current_end}")
-			response = requests.get(url, params=params)
+			response = requests.get(url, params=params, timeout=5)
 			if response.status_code == 200:
 				all_data.extend(response.json())
 			
