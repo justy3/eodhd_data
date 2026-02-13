@@ -90,3 +90,112 @@ def get_raw_intraday(symbol, start_dt, end_dt, api_token=EODHD_API_KEY):
 		df = pd.DataFrame()
 
 	return df
+
+def adjust_intraday_prices(intraday_df, splits_df, div_df):
+	df = intraday_df.copy()
+
+	# ensure datetime is timezone-aware
+	df["datetime"] = pd.to_datetime(df["timestamp"], utc=True, unit="s")
+
+	# convert to US market timezone
+	df["datetime_us"] = df["datetime"].dt.tz_convert("America/New_York")
+
+	# add date and time columns
+	df["date"] = df["datetime_us"].dt.date
+	df["time"] = df["datetime_us"].dt.time
+
+	# adding split adjustment
+	splits = splits_df.copy()
+	splits["date"] = pd.to_datetime(splits["date"]).dt.date
+
+	# parse split ratio (e.g. "10.000000/1.000000")
+	splits["ratio"] = splits["split"].apply(
+		lambda x: float(x.split("/")[0]) / float(x.split("/")[1])
+	)
+
+	# create cumulative split adjustment factor
+	splits = splits.sort_values("date")
+	splits["cum_split_factor"] = splits["ratio"][::-1].cumprod()[::-1]
+
+	df = df.merge(
+		splits[["date", "cum_split_factor"]],
+		on="date",
+		how="left"
+	)
+
+	df["cum_split_factor"] = df["cum_split_factor"].ffill().fillna(1.0)
+
+	# apply split adjustment
+	price_cols = ["open", "high", "low", "close"]
+	for c in price_cols:
+		df[c] = df[c] / df["cum_split_factor"]
+
+	df["volume"] = df["volume"] * df["cum_split_factor"]
+
+	# dividend adjustment
+	divs = div_df.copy()
+	divs["date"] = pd.to_datetime(divs["recordDate"]).dt.date
+	divs = divs.sort_values("date")
+
+	divs["cum_div"] = divs["unadjustedValue"][::-1].cumsum()[::-1]
+
+	df = df.merge(
+		divs[["date", "cum_div"]],
+		on="date",
+		how="left"
+	)
+
+	df["cum_div"] = df["cum_div"].ffill().fillna(0.0)
+
+	for c in price_cols:
+		df[c] = df[c] - df["cum_div"]
+
+	# cleanup
+	# df = df.drop(columns=["cum_split_factor", "cum_div"])
+
+	return df
+
+def download_data(fun_to_d, tickers, start_dt, end_dt):
+	fun_to_name = {
+		get_splits : "split",
+		get_dividends : "div",
+		get_raw_intraday : "intraday"
+	}
+
+	# dataset name
+	data_name = fun_to_name[fun_to_d]
+
+	# create directory if doesnt exist
+	csv_path_dir = f"data/{data_name}/"
+	Path(csv_path_dir).mkdir(parents=True, exist_ok=True)
+
+	# failed tickers
+	failed_tickers = {}
+
+	for sym in tickers:
+		csv_file_path = f"{csv_path_dir}/{sym}.csv"
+
+		if Path(csv_file_path).is_file():
+			qt.log.info(f"csv file for {sym} already exists. skip")
+			continue
+	
+		else:
+			try:
+				qt.log.info(f"querying {data_name} data for symbol {sym}")
+				t = fun_to_d(sym, start_dt, end_dt)
+				if len(t) != 0:
+					qt.log.info(f"saving {t.shape} rows for symbol {sym} to file {csv_file_path}")
+					t.to_csv(csv_file_path, index=False)
+
+				# 
+				else:
+					assert False, "0 rows returned"
+
+				# delete table variable
+				del t
+
+			except Exception as e:
+				qt.log.warning(f"error occurred with ticker : {sym}, error : {e}")
+				failed_tickers[sym] = e
+	
+	return failed_tickers
