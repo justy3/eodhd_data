@@ -2,6 +2,8 @@ import os
 import qt
 import time
 import requests
+import seaborn as sns
+import matplotlib.pyplot as plt
 
 from qt import dt, np, pd, os
 from pathlib import Path
@@ -199,3 +201,19 @@ def download_data(fun_to_d, tickers, start_dt, end_dt):
 				failed_tickers[sym] = e
 	
 	return failed_tickers
+
+def get_data_by_symbol_filename(symbol="MSFT", filename="split"):
+	df = pd.DataFrame()
+	try:
+		df = pd.read_csv(f'data/{filename}/{symbol}.csv')
+	except Exception as e:
+		qt.log.warn(f"{filename} file not found for {symbol}")
+	qt.log.info(f"df.shape = {df.shape}")
+	return df
+
+def add_dt_us_intraday(df):
+	df["datetime"] = pd.to_datetime(df["timestamp"], utc=True, unit="s")
+	df["datetime_us"] = df["datetime"].dt.tz_convert("America/New_York")
+	df["date"] = df["datetime_us"].dt.date
+	df["time"] = df["datetime_us"].dt.time
+	return df

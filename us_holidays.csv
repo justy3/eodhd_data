@@ -1,0 +1,75 @@
+cdr_code,date,holiday_name,settlement_info,trading_info,comment
+US,1/1/2021,New Year's Day,No Settlement,,
+US,18/1/2021,Martin L. King Day,No Settlement,,
+US,15/2/2021,Presidents' Day,No Settlement,,
+US,14/3/2021,Daylight Saving Begins,No Settlement,,Weekend
+US,2/4/2021,Good Friday (not Fed Hol),No Settlement,,
+US,31/5/2021,Memorial Day,No Settlement,,
+US,19/6/2021,Juneteenth,No Settlement,,Weekend
+US,4/7/2021,Independence Day,No Settlement,,Weekend
+US,5/7/2021,Independence Day (obs),No Settlement,,
+US,6/9/2021,Labor Day,No Settlement,,
+US,11/10/2021,Columbus Day (exch Open),No Settlement,,
+US,7/11/2021,Daylight Saving Ends,No Settlement,,Weekend
+US,11/11/2021,Veterans' Day (exch Open),No Settlement,,
+US,25/11/2021,Thanksgiving,No Settlement,,
+US,24/12/2021,Christmas Day (obs),No Settlement,,
+US,25/12/2021,Christmas Day,No Settlement,,Weekend
+US,1/1/2022,New Year's Day,No Settlement,,Weekend
+US,17/1/2022,Martin L. King Day,No Settlement,,
+US,21/2/2022,Presidents' Day,No Settlement,,
+US,13/3/2022,Daylight Saving Begins,No Settlement,,Weekend
+US,15/4/2022,Good Friday (not Fed Hol),No Settlement,,
+US,30/5/2022,Memorial Day,No Settlement,,
+US,19/6/2022,Juneteenth,No Settlement,,Weekend
+US,20/6/2022,Juneteenth (obs),No Settlement,,
+US,4/7/2022,Independence Day,No Settlement,,
+US,5/9/2022,Labor Day,No Settlement,,
+US,10/10/2022,Columbus Day (exch Open),No Settlement,,
+US,6/11/2022,Daylight Saving Ends,No Settlement,,Weekend
+US,11/11/2022,Veterans' Day (exch Open),No Settlement,,
+US,24/11/2022,Thanksgiving,No Settlement,,
+US,25/12/2022,Christmas Day,No Settlement,,Weekend
+US,26/12/2022,Christmas Day (obs),No Settlement,,
+US,2/1/2023,New Years Day (obs),No Settlement,,
+US,16/1/2023,Martin L. King Day,No Settlement,,
+US,20/2/2023,Presidents' Day,No Settlement,,
+US,12/3/2023,Daylight Saving Begins,No Settlement,,Weekend
+US,7/4/2023,Good Friday (not Fed Hol),No Settlement,,
+US,29/5/2023,Memorial Day,No Settlement,,
+US,19/6/2023,Juneteenth,No Settlement,,
+US,4/7/2023,Independence Day,No Settlement,,
+US,4/9/2023,Labor Day,No Settlement,,
+US,9/10/2023,Columbus Day (exch Open),No Settlement,,
+US,5/11/2023,Daylight Saving Ends,No Settlement,,Weekend
+US,11/11/2023,Veterans' Day,No Settlement,,Weekend
+US,23/11/2023,Thanksgiving,No Settlement,,
+US,25/12/2023,Christmas Day,No Settlement,,
+US,1/1/2024,New Year's Day,No Settlement,,
+US,15/1/2024,Martin L. King Day,No Settlement,,
+US,19/2/2024,Presidents' Day,No Settlement,,
+US,10/3/2024,Daylight Saving Begins,No Settlement,,Weekend
+US,29/3/2024,Good Friday (not Fed Hol),No Settlement,,
+US,27/5/2024,Memorial Day,No Settlement,,
+US,19/6/2024,Juneteenth,No Settlement,,
+US,4/7/2024,Independence Day,No Settlement,,
+US,2/9/2024,Labor Day,No Settlement,,
+US,14/10/2024,Columbus Day (exch Open),No Settlement,,
+US,3/11/2024,Daylight Saving Ends,No Settlement,,Weekend
+US,11/11/2024,Veterans' Day (exch Open),No Settlement,,
+US,28/11/2024,Thanksgiving,No Settlement,,
+US,25/12/2024,Christmas Day,No Settlement,,
+US,1/1/2025,New Year's Day,No Settlement,,
+US,20/1/2025,Martin L. King Day,No Settlement,,
+US,17/2/2025,Presidents' Day,No Settlement,,
+US,9/3/2025,Daylight Saving Begins,No Settlement,,Weekend
+US,18/4/2025,Good Friday (not Fed Hol),No Settlement,,
+US,26/5/2025,Memorial Day,No Settlement,,
+US,19/6/2025,Juneteenth,No Settlement,,
+US,4/7/2025,Independence Day,No Settlement,,
+US,1/9/2025,Labor Day,No Settlement,,
+US,13/10/2025,Columbus Day (exch Open),No Settlement,,
+US,2/11/2025,Daylight Saving Ends,No Settlement,,Weekend
+US,11/11/2025,Veterans' Day (exch Open),No Settlement,,
+US,27/11/2025,Thanksgiving,No Settlement,,
+US,25/12/2025,Christmas Day,No Settlement,,
