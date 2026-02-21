@@ -8,6 +8,8 @@ import matplotlib.pyplot as plt
 from qt import dt, np, pd, os
 from pathlib import Path
 
+# constants
+EODHD_CWD = Path(__file__).parent.__str__()
 EODHD_API_KEY = os.environ.get('EODHD_API_KEY')
 
 def get_splits(symbol, start_date, end_date, api_token=EODHD_API_KEY):
@@ -168,7 +170,7 @@ def download_data(fun_to_d, tickers, start_dt, end_dt):
 	data_name = fun_to_name[fun_to_d]
 
 	# create directory if doesnt exist
-	csv_path_dir = f"data/{data_name}/"
+	csv_path_dir = f"{EODHD_CWD}/data/{data_name}/"
 	Path(csv_path_dir).mkdir(parents=True, exist_ok=True)
 
 	# failed tickers
@@ -205,7 +207,7 @@ def download_data(fun_to_d, tickers, start_dt, end_dt):
 def get_data_by_symbol_filename(symbol="MSFT", filename="split"):
 	df = pd.DataFrame()
 	try:
-		df = pd.read_csv(f'data/{filename}/{symbol}.csv')
+		df = pd.read_csv(f'{EODHD_CWD}/data/{filename}/{symbol}.csv')
 	except Exception as e:
 		qt.log.warn(f"{filename} file not found for {symbol}")
 	qt.log.info(f"df.shape = {df.shape}")
